@@ -138,6 +138,11 @@ export default class ProblemList extends PureComponent<ProblemListProps, Problem
     const hostTechNameCell = props => <HostCell name={props.original.hostTechName} maintenance={props.original.maintenance}/>;
 
     const columns = [
+      {
+        Header: 'Time', className: 'last-change', width: 150, accessor: 'timestamp',
+        id: 'lastchange',
+        Cell: props => LastChangeCell(props, options.customLastChangeFormat && options.lastChangeFormat),
+      },
       { Header: 'Host', id: 'host', show: options.hostField, Cell: hostNameCell },
       { Header: 'Host (Technical Name)', id: 'hostTechName', show: options.hostTechNameField, Cell: hostTechNameCell },
       { Header: 'Host Groups', accessor: 'groups', show: options.hostGroups, Cell: GroupCell },
@@ -167,11 +172,6 @@ export default class ProblemList extends PureComponent<ProblemListProps, Problem
         Header: 'Age', className: 'problem-age', width: 100, show: options.ageField, accessor: 'timestamp',
         id: 'age',
         Cell: AgeCell,
-      },
-      {
-        Header: 'Time', className: 'last-change', width: 150, accessor: 'timestamp',
-        id: 'lastchange',
-        Cell: props => LastChangeCell(props, options.customLastChangeFormat && options.lastChangeFormat),
       },
       { Header: '', className: 'custom-expander', width: 60, expander: true, Expander: CustomExpander },
     ];
